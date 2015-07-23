@@ -1,0 +1,11 @@
+{% if field.is_hidden %}{{ field }}{% else %}
+<div class="input-field">
+    {{ field.widget.is_hidden }}
+    {{ field }} {{ field.label_tag }}
+    {% for error in field.errors %}
+    <div class="card-panel red accent-2 white-text">
+        <b>{{ error }}</b>
+    </div>
+    {% endfor %}
+</div>
+{% endif %}

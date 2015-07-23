@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="row">
+    <h1>Bem vindo candidato</h1>
+    <p><strong>Venha trabalhar conosco!</strong> Preencha o formulário abaixo com seu nome, e-mail e sua
+    proficiência nas habilidades mencionadas. </p>
+    <form class="col s12" action="." method="post">{% csrf_token %}
+        <div class="row">
+            <div class="col s12 m6 l6 input-field">{% include "includes/render_field.html" with field=form.name %}</div>
+            <div class="col s12 m6 l6 input-field">{% include "includes/render_field.html" with field=form.email %}</div>
+        </div>
+
+        {% if forms %}
+        <div class="row">
+            <p>Nos informe qual a sua proficiência nas seguintes habilidades:</p>
+            <div class="col s12">
+                <div class="row">
+                {% for form in forms %}
+                    <div class="col s6 m3 l3">
+                        <div class="row">
+                            <div class="col s12 m6 l6">
+                                {% include "includes/render_field.html" with field=form.skill_level %}
+                                {% include "includes/render_field.html" with field=form.expected_skill %}
+                            </div>
+                            <div class="col s12 m6 l6 valign-wrapper">
+                                <p class="valign">{{ form.initial.expected_skill }}</p>
+                            </div>
+                        </div>
+                    </div>
+                {% endfor %}
+                </div>
+            </div>
+        </div>
+        {% endif %}
+        <button type="submit" class="btn waves-effect waves-light">Enviar</button>
+    </form>
+</div>
+{% endblock %}

@@ -1,0 +1,1 @@
+web: gunicorn meuspedidos.wsgi --log-file -
